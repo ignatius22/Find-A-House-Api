@@ -1,6 +1,10 @@
 class User < ApplicationRecord
 	has_secure_password
 
-  validates_presence_of :email
-  validates_uniqueness_of :email
+  has_many :favorites
+  has_many :houses, through: :favorites
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  validates :email, presence: true
+  validates :email, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
 end
