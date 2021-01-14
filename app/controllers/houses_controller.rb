@@ -1,5 +1,6 @@
 class HousesController < ApplicationController
-  
+  before_action :require_login
+
    def index
       render json: House.all
     end

@@ -1,19 +1,39 @@
 class RegistrationsController < ApplicationController
-  def create
-    user = User.create!(
-      email: params['user']['email'],
-      password: params['user']['password'],
-      password_confirmation: params['user']['password_confirmation']
-    )
+ skip_before_action :require_login, only: [:create]
 
-    if user
-      session[:user_id] = user.id
-      render json: {
-        status: :created,
-        user: user
-      }
+  def index
+    @users = User.all
+    render json: @users
+
+  end
+
+  def create
+     @user = User.create(user_params)
+    if @user.valid?
+      token = encode_token({ user_id: @user.id })
+      render json: { user: {
+        email: @user.email
+      }, token: token }
     else
-      render json: { status: 500 }
+      render json: { error: @user.errors.full_messages }
     end
+  end
+
+  # def show
+
+  #   @user = User.find(params[:id])
+  #   render json: @user
+  #   @user_meetups = @user.meetups
+
+  # end
+
+  def update
+    @user = User.find(params[:id])
+    render json: @user
+  end
+
+  private
+  def user_params
+    params.permit(:email, :password, :password_confirmation)
   end
 end
