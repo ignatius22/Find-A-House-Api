@@ -48,6 +48,8 @@ group :development do
   gem 'spring'
   gem 'sqlite3', '~> 1.4'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rspec-rails', '~> 3.5'
+  
 end
 
 group :test do
@@ -56,6 +58,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'rubocop', '~>0.81.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
