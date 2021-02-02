@@ -1,24 +1,26 @@
 class HousesController < ApplicationController
-  before_action :require_login
+  def create
+    houses = House.new(house_params)
 
-   def index
-      render json: House.all
+    if houses.save
+      render json: houses
+    else
+      render json: houses.errors.full_message
     end
+  end
 
-    def create
-      house = House.create!(house_params)
-      render json: house, status: :created
-    end
+  def index
+    render json: House.all
+  end
 
-    def show
-      @house = House.find(params[:id])
-      return render json: @house, status: :ok if @house
-    end
+  def show
+    house = House.find(params[:id])
+    render json: house if house
+  end
 
-    private
+  private
 
-    def house_params
-      params.permit(:description, :name, :image_url)
-    end
-    
+  def house_params
+    params.permit(:name, :description, :image_url)
+  end
 end
