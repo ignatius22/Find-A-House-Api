@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   resources :registrations, only: [:create]
   resources :houses
   resources :favorites
-  root to: "static#home"
+  root to: 'static#home'
 end

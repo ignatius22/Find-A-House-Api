@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-	has_secure_password
+  has_secure_password
 
   has_many :favorites
   has_many :houses, through: :favorites, source: 'house'

@@ -8,7 +8,7 @@ class FavoritesController < ApplicationController
     favorite = Favorite.new(user_id: current_user.id, house_id: params[:house_id])
 
     if favorite.save
-      render json: "we added to your favourites"
+      render json: 'we added to your favourites'
     else
       render json: favorite.errors.full_messages
     end
@@ -17,8 +17,6 @@ class FavoritesController < ApplicationController
   def destroy
     favorite = current_user.favorites.find(params[:id])
 
-    if favourite.destroy
-      render json: "we deleted it from  your favourites"
-    end
+    render json: 'we deleted it from  your favourites' if favorite.destroy
   end
 end
