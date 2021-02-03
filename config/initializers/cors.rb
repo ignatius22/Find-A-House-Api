@@ -6,7 +6,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
-    origins 'https://enigmatic-dusk-17553.herokuapp.com'
+    origins 'https://relaxed-agnesi-6c20fd.netlify.app'
     resource '*', headers: :any, methods: %i[get post put patch delete options head],
                   credentials: true
   end
